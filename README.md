@@ -8,8 +8,7 @@
                            __/ |                      
                           |___/  
                    
-Simple hangman with 3 hints(!), big dictionary of COMMON-NON-WEIRD English words and primitive console graphics.
-
+🅂🄸🄼🄿🄻🄴 🄷🄰🄽🄶🄼🄰🄽 🅆🄸🅃🄷 3 🄷🄸🄽🅃🅂(!), 🄱🄸🄶 🄳🄸🄲🅃🄸🄾🄽🄰🅁🅈 🄾🄵 🄲🄾🄼🄼🄾🄽-🄽🄾🄽-🅆🄴🄸🅁🄳 🄴🄽🄶🄻🄸🅂🄷 🅆🄾🅁🄳🅂 🄰🄽🄳 🄿🅁🄸🄼🄸🅃🄸🅅🄴 🄲🄾🄽🅂🄾🄻🄴 🄶🅁🄰🄿🄷🄸🄲🅂.
 
 ･:*+.(( °ω° ))/.:+____________________!WARNING! ____________________･:*+.\\(( °ω° )).:+
 
