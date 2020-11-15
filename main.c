@@ -1,7 +1,7 @@
 /************************************************************
 *** Title: hAnGmAn GaMe *************************************
 *** Author: cold_summer aka Elizabeth Maslennikova **********
-*** Date: 13/11/2020 ****************************************
+*** Date: 07/11/2020 ****************************************
 *** Description: If you kill him I'm gonna call 911! ********
 ************************************************************/
 
@@ -24,7 +24,7 @@
 #define HANGMAN_ROWS 5// rows of string (begins from 0)
 #define HANGMAN_COLUMNS 7// columns of  string (begins from 0)
 
-static int game_over = -1, wrong = -1, counter = -1;
+static int game_over = -1, wrong = -1, counter = -1, hints = -1;
 static char player_word[MAX], var_for_enter, pc_or_player;
 
 char *hangu_mane[] = 
@@ -99,7 +99,7 @@ srw word;// data type 'srw' and its var "word"
 
 srw word_constructer(char pc_or_player);// func-randomizer
 int check_if_correct(char users_input);// func-checker
-void draw(int users_input);// func-painter
+void draw(int users_input, int pc_or_player);// func-painter
 void clearscr();// func-screen-cleaner for all OS's 
 void game_with_pc(char users_input);
 void game_with_player(char users_input);
@@ -185,7 +185,7 @@ srw word_constructer(char pc_or_player)// START of func
 {
   if(pc_or_player == 'c')
   {
-  word.random_index = rand()%2999;
+  word.random_index = rand()%7;
 
   FILE *file_pointer;
   file_pointer = fopen("dictionary.txt","r");
@@ -240,10 +240,10 @@ int check_if_correct(char users_input)// START of func
 
 // OK, it's going to be a big func, but its logic is simple. Don't be afraid of it
 // there are lots of lines of code which are my comments or printf drawing
-void draw(int users_input)// START of func
+void draw(int users_input, int pc_or_player)// START of func
 {   
 // for one usage of every hint
-  int one_time_only = -1, one_time_only_2 = -1, one_time_only_3 = -1, hints = -1;
+  int one_time_only = -1, one_time_only_2 = -1, one_time_only_3 = -1;
 
    do // game process, loop while game over is false
     { 
@@ -378,7 +378,10 @@ void draw(int users_input)// START of func
 // if the input does not exist in the word
       if(check_if_correct(users_input) == 1)
       { 
+       if(pc_or_player == 'c') 
        printf(ANSI_COLOR_GREEN "Right!\n PC: (╯°□°）╯︵ ┻━┻ — Nooo... \n\n" ANSI_COLOR_RESET);
+       if(pc_or_player == 'p')
+       printf(ANSI_COLOR_GREEN "Right!\n PC: ✺(^▽^✺) ✺(^O^)✺ (✺^▽^) \n —I'm so proud of you!  \n\n" ANSI_COLOR_RESET);
 
        if(game_over == 1)
        {
@@ -397,8 +400,12 @@ void draw(int users_input)// START of func
       }
 // if the input does not exist in the word
       if(check_if_correct(users_input) == 0)
-      {   
+      {
+      if(pc_or_player == 'c')   
       printf(ANSI_COLOR_YELLOW "Wrong!\n PC:（ ^_^）o自自o（^_^ ）— Cheers!\n\n" ANSI_COLOR_RESET);
+      if(pc_or_player == 'p')
+      printf(ANSI_COLOR_YELLOW "Wrong!\n PC:— Nooo...(/ω＼) \n\n" ANSI_COLOR_RESET);
+
       wrong++; 
         if(wrong == ATTEMPTS)
         game_over = 0;
@@ -425,10 +432,21 @@ void draw(int users_input)// START of func
       printf(ANSI_COLOR_MAGENTA "\n\t— OMG!\n\t— It seems that your IQ killed him... \n\t— Za toboy uzhe vyehali, suka. " ANSI_COLOR_RESET);
       printf(ANSI_COLOR_CYAN "━╤デ╦︻(▀̿̿Ĺ̯̿̿▀̿ ̿)\n" ANSI_COLOR_RESET);
       printf(ANSI_COLOR_CYAN "\t(︶︹︺)\n\n" ANSI_COLOR_RESET);
+      if(pc_or_player == 'c')
+      {
       printf(ANSI_COLOR_RED "\n\nPC: — I won.\n" ANSI_COLOR_RESET);
       printf(ANSI_COLOR_RED "\nDon't be upset. Drink some chamomile tea and meditate.\n" ANSI_COLOR_RESET);
       printf(ANSI_COLOR_RED "P.S. by the way, the word was: " ANSI_COLOR_RESET);
       printf("%s", word.letters);
+      }
+      if(pc_or_player == 'p')
+      {
+      printf(ANSI_COLOR_RED "\n\nPC: — Oops... You lost.\n" ANSI_COLOR_RESET);
+      printf(ANSI_COLOR_RED" The secret word of your contestant was: " ANSI_COLOR_RESET);
+      printf("%s", word.letters);
+      printf(ANSI_COLOR_RED "\n\nDon't be upset. Next time you will do better. \nBy the way, I was rooting for you ;)\n\\(ᵔᵕᵔ)/♥ " ANSI_COLOR_RESET);
+
+      }
       }
 
       if(game_over == 1)// in case of victory
@@ -440,9 +458,19 @@ void draw(int users_input)// START of func
       printf(ANSI_COLOR_YELLOW "\n\t— ~(‾▿‾)~ Wow ~(‾▿‾)~ \n\n" ANSI_COLOR_RESET);   
       printf(ANSI_COLOR_CYAN "\n\t ͡ ͡° ͜ ʖ ͡ ͡°)\n\t\\╭☞ \\╭☞ "ANSI_COLOR_CYAN);
       printf(ANSI_COLOR_YELLOW "— You are my hero...\n\n" ANSI_COLOR_RESET);
+      
+      if(pc_or_player == 'c')
+      {
       printf(ANSI_COLOR_RED"\n\nPC: You won.\nYou found my secret word. \nYeah. It was: " ANSI_COLOR_RESET);
       printf("%s",word.letters);
       printf(ANSI_COLOR_RED "\nCongrats, genius ~ \nYou saved that dude from suicide.\n\n ( ^-^)_旦 I just reserved a place in paradise for you ;)\n" ANSI_COLOR_RESET);
+      }
+      if(pc_or_player == 'p')
+      {
+      printf(ANSI_COLOR_RED "\n\nPC: You won.\n\nYou found the secret word of your contestant.\n It was: " ANSI_COLOR_RESET);
+      printf("%s",word.letters);
+      printf(ANSI_COLOR_RED "\n\nCongrats!\n♪♪ ヽ(ˇ∀ˇ )ゞ ♪♬" ANSI_COLOR_RESET);
+      }
       }
       if(game_over == -1)
       printf("\n\n\t\t\t\t\t\t\t\t\t\t\t\t\t Need help? There are some hints.\n\t\t\t\t\t\t\t\t\t\t\t\t\t Press 🅾 (zero) if needed\n");
@@ -460,7 +488,7 @@ void clearscr ()// START of func-screen-cleaner
 
 void game_with_pc(char users_input)// START of func
 { 
- draw(users_input);
+ draw(users_input, pc_or_player);
 }// END of func  
 
 
@@ -473,5 +501,5 @@ scanf("%s",player_word);
 
 word = word_constructer(pc_or_player);
 
-draw(users_input);
+draw(users_input, pc_or_player);
 }// END of func  
