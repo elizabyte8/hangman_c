@@ -18,7 +18,7 @@
 #define ANSI_COLOR_MAGENTA "\x1b[35m"
 #define ANSI_COLOR_CYAN    "\x1b[36m"
 #define ANSI_COLOR_RESET   "\x1b[0m"
-
+ 
 #define MAX 99// temp const for arrays
 #define ATTEMPTS 5// parts of the hanged man (head,hands,legs. Begins from 0)
 #define HANGMAN_ROWS 5// rows of string (begins from 0)
