@@ -30,7 +30,7 @@ act
 action
 active
 activist
-activity
+activity 
 actor
 actress
 actual
